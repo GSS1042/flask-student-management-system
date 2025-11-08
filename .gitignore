@@ -1,0 +1,43 @@
+name: Student Management Workflow
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Unit Tests (Dummy)
+        run: |
+          echo "Running dummy unit tests..."
+          echo "All tests passed successfully!"
+
+      - name: Lint Code (Dummy)
+        run: |
+          echo "Checking code style..."
+          echo "No linting errors found!"
+
+      - name: Build Package (Dummy)
+        run: |
+          echo "Building application package..."
+          mkdir build
+          echo "Dummy build completed successfully!"
+
+      - name: Deploy Application (Dummy)
+        run: |
+          echo "Simulating deployment process..."
+          echo "Application deployed successfully (dummy simulation)."

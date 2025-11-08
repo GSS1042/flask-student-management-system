@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Student{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7 col-md-9">
+      <div class="card shadow-sm">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Edit Student</h5>
+          <a href="{{ url_for('home') }}" class="btn btn-sm btn-outline-secondary">Back to list</a>
+        </div>
+
+        <div class="card-body">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for cat, msg in messages %}
+                <div class="alert alert-{{ 'danger' if cat=='danger' else ('warning' if cat=='warning' else 'success') }} py-2">
+                  {{ msg }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+          <form method="post" action="{{ url_for('edit_student', student_id=student['id']) }}" class="row g-3">
+            <div class="col-12">
+              <label class="form-label">Full name</label>
+              <input name="name" type="text" class="form-control" value="{{ student.get('name','') }}" required autofocus>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Roll No</label>
+              <input name="roll" type="text" class="form-control" value="{{ student.get('roll','') }}" required>
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Course</label>
+              <input name="course" type="text" class="form-control" value="{{ student.get('course','') }}">
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">Email</label>
+              <input name="email" type="email" class="form-control" value="{{ student.get('email','') }}">
+            </div>
+
+            <div class="col-12 d-flex gap-2 justify-content-end">
+              <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">Cancel</a>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card-footer text-muted small">
+          Student ID: {{ student['id'] }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

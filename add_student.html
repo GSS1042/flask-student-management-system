@@ -1,0 +1,45 @@
+<!-- Minimal add_student.html -->
+{% extends "base.html" %}
+
+{% block title %}Add Student{% endblock %}
+
+{% block content %}
+  <div class="container my-5">
+    <h1>Add Student</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="mb-3">
+          {% for cat, msg in messages %}
+            <div class="alert alert-{{ 'danger' if cat=='danger' else 'success' }}">{{ msg }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" action="{{ url_for('add_student') }}" class="mt-3 col-md-6">
+      <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" name="name" class="form-control" value="{{ request.form.get('name','') }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Roll</label>
+        <input type="text" name="roll" class="form-control" value="{{ request.form.get('roll','') }}" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Course</label>
+        <input type="text" name="course" class="form-control" value="{{ request.form.get('course','') }}">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" value="{{ request.form.get('email','') }}">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Add Student</button>
+      <a href="{{ url_for('home') }}" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+  </div>
+{% endblock %}
